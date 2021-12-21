@@ -1,8 +1,8 @@
 version: "3.5"
 services: 
     mongodb-PLP:
-        container_name: mongodb-PLP
-        image: mongo
+        container_name: mongodb-plp
+        image: mongo:4.2
         ports:
             - 27017:27017
         command: mongod
