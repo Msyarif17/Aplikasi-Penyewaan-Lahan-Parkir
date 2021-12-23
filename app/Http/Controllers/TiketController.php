@@ -14,7 +14,9 @@ class TiketController extends Controller
      */
     public function index()
     {
-        //
+        $tikets = Tiket::all();
+        return view('tikets.index',compact('tikets'))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +26,7 @@ class TiketController extends Controller
      */
     public function create()
     {
-        //
+        return view('tikets.create');
     }
 
     /**
@@ -35,7 +37,17 @@ class TiketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'name' => 'required',
+            'detail' => 'required',
+        ]);
+
+
+        Tiket::create($request->all());
+
+
+        return redirect()->route('tikets.index')
+                        ->with('success','tiket created successfully.');
     }
 
     /**
@@ -46,7 +58,7 @@ class TiketController extends Controller
      */
     public function show(Tiket $tiket)
     {
-        //
+        return view('tikets.show',compact('tiket'));
     }
 
     /**
@@ -57,7 +69,7 @@ class TiketController extends Controller
      */
     public function edit(Tiket $tiket)
     {
-        //
+        return view('tikets.edit',compact('tiket'));
     }
 
     /**
@@ -69,7 +81,17 @@ class TiketController extends Controller
      */
     public function update(Request $request, Tiket $tiket)
     {
-        //
+        request()->validate([
+            'name' => 'required',
+            'detail' => 'required',
+        ]);
+
+
+        $tiket->update($request->all());
+
+
+        return redirect()->route('tikets.index')
+                        ->with('success','tiket updated successfully');
     }
 
     /**
@@ -80,6 +102,10 @@ class TiketController extends Controller
      */
     public function destroy(Tiket $tiket)
     {
-        //
+        $tiket->delete();
+
+
+        return redirect()->route('tikets.index')
+                        ->with('success','tiket deleted successfully');
     }
 }

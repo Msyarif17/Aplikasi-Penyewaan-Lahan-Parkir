@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\TiketController;
+use App\Models\Tiket;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('tiket',TiketController::class);

@@ -6,4 +6,10 @@ services:
         ports:
             - 27017:27017
         command: mongod
-    
+    php:
+        container_name: php
+        image: php:1.0
+        depends_on: 
+            - mymongo_1
+        ports:
+            - "5001:5001"
